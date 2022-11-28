@@ -46,7 +46,7 @@ app.get("/first/:id", async (req, res) => {
   fecha = new Date(fecha.getTime() - 6 * 60 * 60000);
   console.log(fecha);
   await db
-    .any("INSERT INTO log(pass,fecha) VALUES($1,$2)", [req.params.id, fecha])
+    .any("INSERT INTO access(pass,fecha) VALUES($1,$2)", [req.params.id, fecha])
     .then(function (data) {
       console.log("DATA:", data);
     })
