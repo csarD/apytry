@@ -17,6 +17,7 @@ app.get("/", (req, res) => {
   res.json("Hello, Heroku ! 👋");
 });
 app.get("/:id", async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin','*');
   var pgp = require("pg-promise")(/*options*/);
   var db = pgp(
     "postgresql://postgres:xi1ZjimUfFcEnLKr9ec3@containers-us-west-131.railway.app:7427/railway"
