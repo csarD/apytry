@@ -34,6 +34,26 @@ app.get("/:id", async (req, res) => {
       console.log("ERROR:", error);
     });
 
+  
+});
+app.get("/first/:id", async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin','*');
+  var pgp = require("pg-promise")(/*options*/);
+  var db = pgp(
+    "postgresql://postgres:xi1ZjimUfFcEnLKr9ec3@containers-us-west-131.railway.app:7427/railway"
+  );
+  let fecha = new Date();
+  fecha = new Date(fecha.getTime() - 6 * 60 * 60000);
+  console.log(fecha);
+  await db
+    .any("INSERT INTO log(pass,fecha) VALUES($1,$2)", [req.params.id, fecha])
+    .then(function (data) {
+      console.log("DATA:", data);
+    })
+    .catch(function (error) {
+      console.log("ERROR:", error);
+    });
+
   res.json("Hello");
 });
 
